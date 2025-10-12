@@ -7,6 +7,7 @@ import ru.yandex.practicum.catsgram.model.User;
 import ru.yandex.practicum.catsgram.service.UserService;
 
 import java.util.Collection;
+import java.util.Optional;
 
 
 @RestController
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User findById(@PathVariable long userId) {
+    public Optional<User> findById(@PathVariable long userId) {
         return userService.findById(userId);
     }
 

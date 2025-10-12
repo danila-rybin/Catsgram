@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -68,11 +69,7 @@ public class UserService {
         return users.keySet().stream().mapToLong(id -> id).max().orElse(0) + 1;
     }
 
-    public User findById(long userId) {
-        User user = users.get(userId);
-        if (user == null) {
-            throw new NotFoundException("Юзер с id = " + userId + " не найден");
-        }
-        return user;
+    public Optional<User> findById(long authorId) {
+        return Optional.ofNullable(users.get(authorId));
     }
 }
