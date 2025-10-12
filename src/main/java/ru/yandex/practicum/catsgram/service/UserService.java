@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import ru.yandex.practicum.catsgram.exception.ConditionsNotMetException;
 import ru.yandex.practicum.catsgram.exception.DuplicatedDataException;
 import ru.yandex.practicum.catsgram.exception.NotFoundException;
+import ru.yandex.practicum.catsgram.model.Post;
 import ru.yandex.practicum.catsgram.model.User;
 
 import java.time.Instant;
@@ -65,5 +66,13 @@ public class UserService {
     // Генерация следующего ID
     private long getNextId() {
         return users.keySet().stream().mapToLong(id -> id).max().orElse(0) + 1;
+    }
+
+    public User findById(long userId) {
+        User user = users.get(userId);
+        if (user == null) {
+            throw new NotFoundException("Юзер с id = " + userId + " не найден");
+        }
+        return user;
     }
 }
